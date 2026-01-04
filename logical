@@ -1,0 +1,107 @@
+const http = require('http');
+const express = require('express');
+  const app = express();
+  app.use((req,res,next)=>{
+    console.log("first middleware",req.url,req.method);
+    res.send(('<p>welcome to my new application</> '));
+    
+  });
+
+   app.use((req,res,next)=>{
+    console.log("second middleware",req.url,req.method);
+  });
+  const server = http.createServer(app);
+ const  PORT = 3004;
+ server.listen(PORT,() => {
+  console.log(`Server is running on address http://localhost:${PORT}`);
+ });// base code for understanding express middleware
+
+
+
+code aage ka 
+  //http ke bina bhi chalega app(app act as server act as request handler) se kaam hoga 
+  //const http = require('http');
+ const express = require('express');
+   const app = express();
+   app.use("/",(req,res,next)=>{
+     console.log("first middleware",req.url,req.method);
+    // res.send(('<p>welcome to my new application</> '))
+     next();
+   });
+    app.use("/submit",(req,res,next)=>{
+     console.log("second middleware",req.url,req.method);
+     res.send(('<p>thnaks<p/> '))
+     next();
+   });
+ 
+    app.use("/",(req,res,next)=>{
+     console.log("second middleware",req.url,req.method);
+     res.send(('<p>thnaks<p/> '))
+     next();
+   });
+ 
+   
+  // no need to write const server app act wil as server
+   //const server = http.createServer(app);
+  const  PORT = 3004;
+  // server.listen(PORT,() => { ki jagah app.listen likh dena
+  app.listen(PORT,() => {
+   console.log(`Server is running on address http://localhost:${PORT}`);
+  });
+//cd "c:\Users\ayush\OneDrive\Desktop\nodejs\pratise set\" ; node app.js
+
+  //project hai user ka data liya via get request and post requestand post method se le lia or name kar lia with the help of boay parser 
+  
+  const express = require('express');
+  const app = express();
+  app.use(express.urlencoded({ extended: true }));
+  app.use ((req,res,next) => {
+    console.log("first middleware",req.url,req.method);
+    next();
+  });
+  
+  app.use ((req,res,next) => {
+    console.log("second middleware",req.url,req.method);
+    next(); 
+  });
+  
+  //app.use((req,res,next) => {
+  //console.log("third middleware",req.url,req.method);
+  //res.send("<p>welcome to my application</p>");
+  //})
+  app.get("/",(req,res,next) =>{
+    console.log("handling for / path ");
+    res.send("<h1>welcome to home page</h1>");
+  })
+  app.get("/contact-us",(req,res,next) =>{
+    console.log("handling for /contact-us path ");
+    res.send(`
+      <html>
+        <head>
+          <title>Contact Us</title>
+        </head>
+        <body>
+          <h1>Contact Us</h1>
+          <form action="/contact-us" method="POST">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required><br><br>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br><br>
+            <button type="submit">Submit</button>
+          </form>
+        </body>
+      </html>
+    `);
+  })
+  
+  app.post("/contact-us", (req, res) => {
+    console.log("Form submitted:", req.body);
+    res.send("Thank you for contacting us!");
+  })
+  
+  const PORT = 3004;
+  app.listen(PORT,()=>{
+  console.log(`server is running on address http://localhost:${PORT}`);
+  });
+
+  
