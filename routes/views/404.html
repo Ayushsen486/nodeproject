@@ -1,16 +1,348 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>page not found</title>
+    <title>Page Not Found - Airbnb</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .navbar .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #FF385C;
+            text-decoration: none;
+        }
+
+        .navbar .logo:hover {
+            color: #E31B54;
+        }
+
+        .navbar nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        .navbar nav ul li {
+            margin-left: 30px;
+        }
+
+        .navbar nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar nav ul li a:hover {
+            background: #FF385C;
+            color: white;
+        }
+
+        .error-container {
+            background: white;
+            border-radius: 20px;
+            padding: 60px 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            max-width: 600px;
+            width: 90%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .error-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #FF385C, #E31B54, #FF385C);
+        }
+
+        .error-icon {
+            font-size: 6rem;
+            margin-bottom: 20px;
+            display: block;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .error-title {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #FF385C;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(255, 56, 92, 0.1);
+        }
+
+        .error-subtitle {
+            font-size: 1.5rem;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .error-message {
+            color: #777;
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .error-actions {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+            min-width: 160px;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #FF385C 0%, #E31B54 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 56, 92, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 56, 92, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #FF385C;
+            border: 2px solid #FF385C;
+        }
+
+        .btn-secondary:hover {
+            background: #FF385C;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .suggestions {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid #e9ecef;
+            text-align: left;
+        }
+
+        .suggestions h3 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            text-align: center;
+        }
+
+        .suggestion-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .suggestion-link {
+            display: block;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .suggestion-link:hover {
+            background: #FF385C;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .suggestion-link strong {
+            display: block;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .suggestion-link span {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .search-box {
+            margin: 30px 0;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 20px;
+            border: 2px solid #e1e5e9;
+            border-radius: 25px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #FF385C;
+            box-shadow: 0 0 0 3px rgba(255, 56, 92, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .error-container {
+                padding: 40px 20px;
+            }
+
+            .error-title {
+                font-size: 3rem;
+            }
+
+            .error-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 250px;
+            }
+
+            .suggestion-links {
+                grid-template-columns: 1fr;
+            }
+
+            .navbar .container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .navbar nav ul {
+                margin-top: 15px;
+            }
+
+            .navbar nav ul li {
+                margin-left: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>404 Page Not Found</h1>
-</header>
+    <nav class="navbar">
+        <div class="container">
+            <a href="/" class="logo">🏠 Airbnb</a>
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/host/add-home">Add Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </nav>
 
-    <main><a href="/">Go to Home</a>
-    </main>
+    <div class="error-container">
+        <div class="error-icon">🏠</div>
+        <h1 class="error-title">404</h1>
+        <h2 class="error-subtitle">Page Not Found</h2>
+        <p class="error-message">
+            Oops! It looks like the page you're looking for doesn't exist.
+            The link might be broken, or the page may have been moved or deleted.
+        </p>
+
+        <div class="search-box">
+            <input type="text" placeholder="Search for homes..." readonly>
+        </div>
+
+        <div class="error-actions">
+            <a href="/" class="btn btn-primary">Go to Homepage</a>
+            <a href="/host/add-home" class="btn btn-secondary">List Your Home</a>
+        </div>
+
+        <div class="suggestions">
+            <h3>Popular Destinations</h3>
+            <div class="suggestion-links">
+                <a href="/" class="suggestion-link">
+                    <strong>New York</strong>
+                    <span>2,500+ homes</span>
+                </a>
+                <a href="/" class="suggestion-link">
+                    <strong>Paris</strong>
+                    <span>1,800+ homes</span>
+                </a>
+                <a href="/" class="suggestion-link">
+                    <strong>Tokyo</strong>
+                    <span>3,200+ homes</span>
+                </a>
+                <a href="/" class="suggestion-link">
+                    <strong>London</strong>
+                    <span>2,100+ homes</span>
+                </a>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

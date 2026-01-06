@@ -1,17 +1,12 @@
-//local module 
-const path = require('path');
-const rootDir = require('./utils/pathUtils');
+
 const express= require('express');
 const hostRouter = express.Router();
+//local module
+const homesController = require('../controller/homes');
+//controller call ho raha 
+hostRouter.get("/add-home",homesController.getAddHome);
+hostRouter.post("/add-home",homesController.postAddHome);
 
-hostRouter.get("/add-home",(req,res,next) => {
-  console.log("add home page show ho raha hai ");
-  res.sendFile(path.join(rootDir,'routes','views','addhome.html'));
-
-});
-hostRouter.post("/add-home",(req,res,next) => {
- console.log(req.body);
-  res.sendFile(path.join(rootDir,'routes','views','homeadd.html'));
-});
-
+// Route to display all registered homes
+hostRouter.get("/homes",homesController.gethome);
 module.exports = hostRouter

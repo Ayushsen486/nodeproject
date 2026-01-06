@@ -1,16 +1,321 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>home added </title>
+    <title>Home Listed Successfully - Airbnb</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .navbar .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #FF385C;
+            text-decoration: none;
+        }
+
+        .navbar .logo:hover {
+            color: #E31B54;
+        }
+
+        .navbar nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        .navbar nav ul li {
+            margin-left: 30px;
+        }
+
+        .navbar nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar nav ul li a:hover {
+            background: #FF385C;
+            color: white;
+        }
+
+        .success-card {
+            background: white;
+            border-radius: 20px;
+            padding: 60px 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .success-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #FF385C, #E31B54, #FF385C);
+            animation: gradientShift 3s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .success-card h1 {
+            color: #FF385C;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .success-card p {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .home-details {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .home-details h3 {
+            color: #FF385C;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .detail-item:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .detail-value {
+            color: #666;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+            min-width: 140px;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #FF385C 0%, #E31B54 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 56, 92, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 56, 92, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #FF385C;
+            border: 2px solid #FF385C;
+        }
+
+        .btn-secondary:hover {
+            background: #FF385C;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .next-steps {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .next-steps h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .next-steps ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+        }
+
+        .next-steps li {
+            padding: 8px 0;
+            color: #666;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .next-steps li:before {
+            content: "📋";
+            position: absolute;
+            left: 0;
+            top: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .success-card {
+                padding: 40px 20px;
+            }
+
+            .success-card h1 {
+                font-size: 2rem;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 250px;
+            }
+
+            .navbar .container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .navbar nav ul {
+                margin-top: 15px;
+            }
+
+            .navbar nav ul li {
+                margin-left: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1> Home submitted successfully</h1>
-    </header>
-      <main>
-    <a href ="/">Go to Home</a>
-    </main>
+    <nav class="navbar">
+        <div class="container">
+            <a href="/" class="logo">🏠 Airbnb</a>
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/host/add-home">Add Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </nav>
+
+    <div class="success-card">
+        <span class="success-icon">🎉</span>
+        <h1>Home Listed Successfully!</h1>
+        <p>Your home has been added to Airbnb and is now available for booking. Guests from around the world can discover your unique space.</p>
+
+        <div class="home-details">
+            <h3>Listing Details</h3>
+            <div class="detail-item">
+                <span class="detail-label">Status:</span>
+                <span class="detail-value">Active & Live</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">Visibility:</span>
+                <span class="detail-value">Public</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">Booking:</span>
+                <span class="detail-value">Available</span>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <a href="/host/homes" class="btn btn-primary">View All Homes</a>
+            <a href="/host/add-home" class="btn btn-secondary">List Another Home</a>
+        </div>
+
+        <div class="next-steps">
+            <h3>What's Next?</h3>
+            <ul>
+                <li>Respond to booking inquiries within 24 hours</li>
+                <li>Prepare your home for guest arrival</li>
+                <li>Coordinate check-in and check-out times</li>
+                <li>Leave reviews for your guests</li>
+            </ul>
+        </div>
+    </div>
 </body>
 </html>

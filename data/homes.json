@@ -1,0 +1,36 @@
+[
+  {
+    "homeName": "ayush",
+    "location": "kalapipal ",
+    "city": "bangaluru",
+    "rents": "7666",
+    "rating": "5"
+  },
+  {
+    "homeName": "kalalpipal",
+    "location": "karnataka",
+    "city": "indore",
+    "rents": "44",
+    "rating": "4",
+    "photourl": "https://images.pexels.com/photos/1134176/pexels-photo-1134176.jpeg",
+    "id": 1767642947942
+  },
+  {
+    "homeName": "utsav bhavan",
+    "location": "madhyapradesh",
+    "city": "bhopal",
+    "rents": "599",
+    "rating": "5",
+    "photourl": "https://images.pexels.com/photos/1134176/pexels-photo-1134176.jpeg",
+    "id": 1767643098005
+  },
+  {
+    "homeName": "kalalpipal",
+    "location": "kalapipal ",
+    "city": "indore",
+    "rents": "66",
+    "rating": "4",
+    "photourl": "https://images.pexels.com/photos/1134176/pexels-photo-1134176.jpeg",
+    "id": 1767643754467
+  }
+]

@@ -1,16 +1,303 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add home to airbnb </title>
+    <title>List Your Home - Airbnb</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .navbar .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #FF385C;
+            text-decoration: none;
+        }
+
+        .navbar .logo:hover {
+            color: #E31B54;
+        }
+
+        .navbar nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        .navbar nav ul li {
+            margin-left: 30px;
+        }
+
+        .navbar nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar nav ul li a:hover {
+            background: #FF385C;
+            color: white;
+        }
+
+        .main-content {
+            padding: 120px 20px 80px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .form-header h1 {
+            color: #FF385C;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .form-header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+            font-size: 1rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #FF385C;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(255, 56, 92, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #FF385C 0%, #E31B54 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 56, 92, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 56, 92, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #666;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .back-link:hover {
+            color: #FF385C;
+        }
+
+        .features-list {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .features-list h3 {
+            color: #FF385C;
+            margin-bottom: 10px;
+        }
+
+        .features-list ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .features-list li {
+            padding: 5px 0;
+            color: #666;
+        }
+
+        .features-list li:before {
+            content: "✓";
+            color: #FF385C;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .form-card {
+                padding: 30px 20px;
+            }
+
+            .form-header h1 {
+                font-size: 2rem;
+            }
+
+            .navbar .container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .navbar nav ul {
+                margin-top: 15px;
+            }
+
+            .navbar nav ul li {
+                margin-left: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <header>
-    <h1> register your home </h1>  
-    </header>
-    <main>
- <form action='/host/add-home' method='POST'><input type='text' name='homeName' placeholder='Enter home name'><button type='submit'>Submit</button></form>
-    </main> 
+    <nav class="navbar">
+        <div class="container">
+            <a href="/" class="logo">🏠 Airbnb</a>
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/host/add-home">Add Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="form-card">
+                <div class="form-header">
+                    <h1>List Your Home</h1>
+                    <p>Share your space with travelers from around the world</p>
+                </div>
+
+                <div class="features-list">
+                    <h3>Why list on Airbnb?</h3>
+                    <ul>
+                        <li>Earn extra income</li>
+                        <li>Meet interesting people</li>
+                        <li>Share your culture</li>
+                        <li>Flexible hosting options</li>
+                    </ul>
+                </div>
+
+                <form action='/host/add-home' method='POST'>
+                    <div class="form-group">
+                        <label for="homeName">Home Name</label>
+                        <input type='text' id="homeName" name='homeName' placeholder='Enter your home name' required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <input type='text' id="location" name='location' placeholder='Enter location (city, state)' required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="city">City</label>
+                        <input type='text' id="city" name='city' placeholder='Enter city name' required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rents">Rent per Night ($)</label>
+                        <input type='number' id="rents" name='rents' placeholder='Enter rent amount' min='0' required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rating">Rating (1-5)</label>
+                        <input type='number' id="rating" name='rating' placeholder='Enter rating' min='1' max='5' step='0.1' required>
+                    </div>
+
+                    <button type='submit' class="submit-btn">Submit</button>
+                </form>
+
+                <a href="/" class="back-link">← Back to Home</a>
+            </div>
+        </div>
+    </main>
 </body>
 </html>

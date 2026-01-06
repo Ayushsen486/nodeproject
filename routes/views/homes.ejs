@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Homes - Airbnb</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .navbar .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #FF385C;
+            text-decoration: none;
+        }
+
+        .navbar .logo:hover {
+            color: #E31B54;
+        }
+
+        .navbar nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        .navbar nav ul li {
+            margin-left: 30px;
+        }
+
+        .navbar nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar nav ul li a:hover {
+            background: #FF385C;
+            color: white;
+        }
+
+        .main-content {
+            padding: 120px 20px 80px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .homes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .home-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .home-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .home-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .home-content {
+            padding: 20px;
+        }
+
+        .home-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #FF385C;
+            margin-bottom: 10px;
+        }
+
+        .home-location {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        .home-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .home-price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .home-rating {
+            display: flex;
+            align-items: center;
+            color: #FF385C;
+            font-weight: 600;
+        }
+
+        .home-rating::before {
+            content: "★";
+            margin-right: 5px;
+        }
+
+        .book-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #FF385C 0%, #E31B54 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .book-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 56, 92, 0.3);
+        }
+
+        .no-homes {
+            text-align: center;
+            background: white;
+            border-radius: 15px;
+            padding: 60px 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .no-homes h2 {
+            color: #FF385C;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        .no-homes p {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .add-home-btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: #FF385C;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .add-home-btn:hover {
+            background: #E31B54;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+
+            .homes-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .navbar .container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .navbar nav ul {
+                margin-top: 15px;
+            }
+
+            .navbar nav ul li {
+                margin-left: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="/" class="logo">🏠 Airbnb</a>
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/host/add-home">Add Home</a></li>
+                    <li><a href="/host/homes">View Homes</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="header">
+                <h1>Available Homes</h1>
+                <p>Discover amazing places to stay around the world</p>
+            </div>
+
+            <% if (homes && homes.length > 0) { %>
+                <div class="homes-grid">
+                    <% homes.forEach(home => { %>
+                        <div class="home-card">
+                            <img src="<%= home.photourl %>" alt="<%= home.homeName %>" class="home-image" onerror="this.src='https://via.placeholder.com/350x200?text=Hotel+Image'">
+                            <div class="home-content">
+                                <h3 class="home-title"><%= home.homeName %></h3>
+                                <div class="home-location">
+                                    📍 <%= home.city %>, <%= home.location %>
+                                </div>
+                                <div class="home-details">
+                                    <div class="home-price">$<%= home.rents %>/night</div>
+                                    <div class="home-rating"><%= home.rating %> ⭐</div>
+                                </div>
+                                <button class="book-btn">Book Now</button>
+                            </div>
+                        </div>
+                    <% }); %>
+                </div>
+            <% } else { %>
+                <div class="no-homes">
+                    <h2>No Homes Available</h2>
+                    <p>Be the first to list your home on Airbnb!</p>
+                    <a href="/host/add-home" class="add-home-btn">Add Your Home</a>
+                </div>
+            <% } %>
+        </div>
+    </main>
+</body>
+</html>
